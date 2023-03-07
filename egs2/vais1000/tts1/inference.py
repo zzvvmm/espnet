@@ -2,7 +2,7 @@ from espnet2.bin.tts_inference import Text2Speech
 import soundfile as sf
 import os
 
-vocoder = 'checkpoint-20000steps.pkl'
+vocoder = 'checkpoint-25000steps.pkl'
 root = '/home/user123456/work/tts/ParallelWaveGAN/egs/vais1000/voc1/exp/train_nodev_parallel_wavegan.v1'
 vocoder_file = os.path.join(root,vocoder)
 print(vocoder_file)

@@ -14,12 +14,12 @@ fi
 set -euo pipefail
 
 cwd=$(pwd)
-if [ ! -e "${download_dir}/LJSpeech-1.1" ]; then
+if [ ! -e "${download_dir}/vais1000" ]; then
     mkdir -p "${download_dir}"
     cd "${download_dir}"
-    wget http://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2
-    tar -vxf ./*.tar.bz2
-    rm ./*.tar.bz2
+    gdown 1iKehIo0-kF5dOuXeKrRNkEh_wBtsfdDV
+    unzip ./*.zip
+    rm ./*.zip
     cd "${cwd}"
     echo "successfully prepared data."
 else
