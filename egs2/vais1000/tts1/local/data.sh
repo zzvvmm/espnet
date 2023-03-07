@@ -12,8 +12,12 @@ SECONDS=0
 
 stage=-1
 stop_stage=2
-threshold=35
 nj=32
+# silence part trimming related
+do_trimming=true
+trim_threshold=35 # (in decibels)
+trim_win_length=1024
+trim_shift_length=256
 
 log "$0 $*"
 . utils/parse_options.sh
@@ -80,23 +84,26 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
 fi
 
 if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
-    log "stage 1: scripts/audio/trim_silence.sh"
-    # shellcheck disable=SC2154
-    scripts/audio/trim_silence.sh \
-        --cmd "${train_cmd}" \
-        --nj "${nj}" \
-        --fs 22050 \
-        --win_length 1024 \
-        --shift_length 256 \
-        --threshold "${threshold}" \
-        "data/${spk,,}" "data/${spk,,}/log"
+    if ${do_trimming}; then
+        log "stage 1: scripts/audio/trim_silence.sh"
+        # shellcheck disable=SC2154
+        scripts/audio/trim_silence.sh \
+            --cmd "${train_cmd}" \
+            --nj "${nj}" \
+            --fs 22050 \
+            --win_length ${trim_win_length} \
+            --shift_length ${trim_shift_length} \
+            --threshold "${trim_threshold}" \
+            data/train data/train/log
+    fi
+
     log "stage 1.5: utils/subset_data_dir.sh"
     # make evaluation and devlopment sets
     utils/subset_data_dir.sh --last data/train 500 data/deveval
     utils/subset_data_dir.sh --last data/deveval 250 data/${eval_set}
     utils/subset_data_dir.sh --first data/deveval 250 data/${train_dev}
     n=$(( $(wc -l < data/train/wav.scp) - 500 ))
-    utils/subset_data_dir.sh --first data/train ${n} data/${train_set}
+    utils/subset_data_dir.sh --first data/train ${n} data/${train_set}    
 fi
 
 log "Successfully finished. [elapsed=${SECONDS}s]"

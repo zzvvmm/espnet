@@ -18,7 +18,7 @@ if [ ! -e "${download_dir}/vais1000" ]; then
     mkdir -p "${download_dir}"
     cd "${download_dir}"
     gdown 13k3QeT-en3go-5rnYZPGC4DDRZCM_SYw
-    unzip ./*.zip -t "${download_dir}/vais1000"
+    unzip ./*.zip
     rm ./*.zip
     cd "${cwd}"
     echo "successfully prepared data."
