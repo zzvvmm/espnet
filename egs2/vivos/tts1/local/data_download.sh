@@ -17,7 +17,7 @@ cwd=$(pwd)
 if [ ! -e "${download_dir}/vivos" ]; then
     mkdir -p "${download_dir}"
     cd "${download_dir}"
-    wget https://huggingface.co/datasets/ntt123/infore/resolve/main/infore_16k_denoised.zip
+    gdown 1SBcglvbrPnuqtm9E2AmxhaTwr6ljEuFw
     unzip ./*.zip
     rm ./*.zip
     cd "${cwd}"
