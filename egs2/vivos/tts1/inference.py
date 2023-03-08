@@ -1,6 +1,6 @@
 # from espnet2.bin.tts_inference import Text2Speech
 from espnet_onnx import Text2Speech
-import espnet2
+
 import soundfile as sf
 import os
 from espnet_onnx.export import TTSModelExport
@@ -16,13 +16,14 @@ model_file="/home/user123456/work/tts/train/espnet/egs2/vais1000/tts1/result/exp
 # model_file="/home/user123456/work/tts/train/espnet/egs2/vais1000/tts1/exp/tts_train_raw_phn_vietnamese_espeak_ng_vi_vn_x_south/66epoch.pth"
 
 # tts = Text2Speech.from_pretrained(model_file=model_file)
-tts = espnet2.bin.tts_inference.Text2Speech.from_pretrained(model_file=model_file,
-                                  vocoder_file=vocoder_file)
+# tts = Text2Speech.from_pretrained(model_file=model_file,
+#                                   vocoder_file=vocoder_file)
 # wav = tts(text)["wav"]
 
 m = TTSModelExport()
-tag_name = 'hainong-tacotron2'
-m.export(tts, tag_name, quantize=True)
+tag_name = 'kan-bayashi/ljspeech_vits'
+m.export_from_pretrained(tag_name, quantize=True)
+# m.export(tts, tag_name, quantize=True)
 text2speech = Text2Speech(tag_name, use_quantized=False)
 
 output_dict = text2speech(text) # inference with onnx model.
