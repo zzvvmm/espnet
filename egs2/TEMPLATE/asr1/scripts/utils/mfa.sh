@@ -30,7 +30,7 @@ split_sets="tr_no_dev dev eval1"    # Name of the splits of the data that will b
 # Data prep related
 local_data_opts=""  # Options to be passed to local/data.sh.
 hop_size=256        # The number of shift points.
-samplerate=22050    # Sampling rate.
+samplerate=16000    # Sampling rate.
 
 # MFA/Tokenization related
 language=""                     # The language type of corpus.

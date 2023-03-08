@@ -5,12 +5,12 @@ set -e
 set -u
 set -o pipefail
 
-fs=22050
+fs=16000
 n_fft=1024
 n_shift=256
 
 opts=
-if [ "${fs}" -eq 22050 ]; then
+if [ "${fs}" -eq 16000 ]; then
     # To suppress recreation, specify wav format
     opts="--audio_format wav "
 else
@@ -40,6 +40,5 @@ CUDA_VISIBLE_DEVICES=1 ./tts.sh \
     --valid_set "${valid_set}" \
     --test_sets "${test_sets}" \
     --srctexts "data/${train_set}/text" \
-    --ngpu 1 \
-    --stage 6 \
+    --ngpu 0 \
     ${opts} "$@"

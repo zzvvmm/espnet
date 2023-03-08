@@ -5,7 +5,7 @@ set -e
 set -u
 set -o pipefail
 
-fs=22050
+fs=16000
 n_shift=256
 
 ./scripts/utils/mfa.sh \
