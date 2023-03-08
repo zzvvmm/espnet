@@ -89,3 +89,4 @@ tools/ice-g2p*
 tools/fairseq*
 tools/featbin*
 venv
+result
