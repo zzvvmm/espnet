@@ -37,6 +37,8 @@ g2p_choices = [
     "espeak_ng_italian",
     "espeak_ng_ukrainian",
     "espeak_ng_polish",
+    "espeak_ng_vi",
+    "espeak_ng_vi_vn_x_central",
     "espeak_ng_vi_vn_x_south",
     "g2pk",
     "g2pk_no_space",
@@ -547,7 +549,21 @@ class PhonemeTokenizer(AbsTokenizer):
                 with_stress=True,
                 preserve_punctuation=True,
             )
-        elif g2p_type == "espeak_ng_vi_vn_x_south":
+        elif g2p_type == "espeak_ng_vi":  # Northern Vietnam
+            self.g2p = Phonemizer(
+                language="vi",
+                backend="espeak",
+                with_stress=True,
+                preserve_punctuation=True,
+            )
+        elif g2p_type == "espeak_ng_vi_vn_x_central	":  # Central Vietnam
+            self.g2p = Phonemizer(
+                language="vi-vn-x-central",
+                backend="espeak",
+                with_stress=True,
+                preserve_punctuation=True,
+            )
+        elif g2p_type == "espeak_ng_vi_vn_x_south":  # Southern Vietnam
             self.g2p = Phonemizer(
                 language="vi-vn-x-south",
                 backend="espeak",

@@ -24,8 +24,8 @@ test_sets="dev eval1"
 train_config=conf/train.yaml
 inference_config=conf/decode.yaml
 
-g2p=espeak_ng_vi_vn_x_south
-CUDA_VISIBLE_DEVICES=1 ./tts.sh \
+g2p=espeak_ng_vi
+./tts.sh \
     --lang vi \
     --feats_type raw \
     --fs "${fs}" \
@@ -40,5 +40,5 @@ CUDA_VISIBLE_DEVICES=1 ./tts.sh \
     --valid_set "${valid_set}" \
     --test_sets "${test_sets}" \
     --srctexts "data/${train_set}/text" \
-    --ngpu 0 \
+    --ngpu 1 \
     ${opts} "$@"
